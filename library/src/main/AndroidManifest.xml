@@ -1,3 +1,4 @@
-<manifest package="io.jitpack.example.examplelib">
+<manifest
+    package="com.tobiasschuerg.colortool">
 
 </manifest>
