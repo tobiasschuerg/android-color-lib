@@ -5,11 +5,11 @@ group='com.github.tobiasschuerg'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "24.0.1"
+    buildToolsVersion "24.0.3"
 
     defaultConfig {
         minSdkVersion 1
-        targetSdkVersion 24
+        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
     }
@@ -22,7 +22,7 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:24.1.1'
+    compile 'com.android.support:support-v4:25.0.0'
 }
 
 // build a jar with source files
