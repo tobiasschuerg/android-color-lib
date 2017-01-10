@@ -49,7 +49,7 @@ public class HSLColor extends AbstractColor<HSLColor> {
 
     @NonNull
     @Override
-    public HSLColor from(ColorModel other) {
+    public HSLColor from(@NonNull ColorModel other) {
         return fromColor(other.toColor());
     }
 

@@ -5,7 +5,7 @@ import com.tobiasschuerg.color.random.RandomColor;
 /**
  * Created by Tobias
  */
-public class DeluxeColorCreator {
+public class ColorCreator {
 
     /*
     Returns a random color

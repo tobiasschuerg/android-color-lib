@@ -30,7 +30,7 @@ public class HEXColor implements ColorModel<HEXColor> {
 
     @NonNull
     @Override
-    public HEXColor from(ColorModel other) {
+    public HEXColor from(@NonNull ColorModel other) {
         return fromColor(other.toColor());
     }
 

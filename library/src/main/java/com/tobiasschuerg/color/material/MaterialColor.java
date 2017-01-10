@@ -4,7 +4,7 @@ import android.graphics.Color;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 
-import com.tobiasschuerg.color.DeluxeColorCreator;
+import com.tobiasschuerg.color.ColorCreator;
 import com.tobiasschuerg.color.models.AbstractColor;
 import com.tobiasschuerg.color.models.ColorModel;
 import com.tobiasschuerg.color.models.HSLColor;
@@ -42,7 +42,7 @@ public class MaterialColor extends AbstractColor<MaterialColor> {
     }
 
     public static MaterialColor random(boolean onlyOfficialColors) {
-        return new MaterialColor(DeluxeColorCreator.getRandomColor());
+        return new MaterialColor(ColorCreator.getRandomColor());
     }
 
     /**
@@ -70,9 +70,14 @@ public class MaterialColor extends AbstractColor<MaterialColor> {
         return hsl.lightness(initialLightness * 0.58f).toColor();
     }
 
-//    public int getTextBlackWhite() {
-//        return hsl.getForeGroundColor(AbstractColor.ColorPreference.WHITE);
-//    }
+    /**
+     * Estimates the best fitting text color if this color is used as background to draw on.
+     *
+     * @return black or white
+     */
+    public int getTextBlackWhite() {
+        return hsl.getForeGroundColor(AbstractColor.ColorPreference.WHITE);
+    }
 
     public int get900() {
         return hsl.lightness(0.1f).toColor();
@@ -91,7 +96,7 @@ public class MaterialColor extends AbstractColor<MaterialColor> {
 
     @NonNull
     @Override
-    public MaterialColor from(ColorModel other) {
+    public MaterialColor from(@NonNull ColorModel other) {
         hsl.from(other);
         return this;
     }

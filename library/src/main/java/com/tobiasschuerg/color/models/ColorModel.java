@@ -13,7 +13,7 @@ public interface ColorModel<T> {
     T fromColor(@ColorInt int color);
 
     @NonNull
-    T from(ColorModel other);
+    T from(@NonNull ColorModel other);
 
     @ColorInt
     int toColor();

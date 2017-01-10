@@ -55,7 +55,7 @@ public class HSVColor implements ColorModel<HSVColor> {
 
     @NonNull
     @Override
-    public HSVColor from(ColorModel other) {
+    public HSVColor from(@NonNull ColorModel other) {
         return fromColor(other.toColor());
     }
 }

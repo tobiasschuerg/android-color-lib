@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 
 @Deprecated
-// TODO: mrege with MaterialColor
+// TODO: merge with MaterialColor
 public class MaterialColorGenerator {
 
     private final Context context;

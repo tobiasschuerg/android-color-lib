@@ -51,6 +51,7 @@ public abstract class AbstractColor<T> implements ColorModel<T>, Comparable<Abst
         }
     }
 
+
     /**
      * Returns the complimentary (opposite) color.
      * Based on http://www.java2s.com/Code/Android/2D-Graphics/Returnsthecomplimentaryoppositecolor.htm
@@ -105,6 +106,62 @@ public abstract class AbstractColor<T> implements ColorModel<T>, Comparable<Abst
             return (((AbstractColor) o).toColor() == toColor());
         }
         return super.equals(o);
+    }
+
+    /**
+     * Based on http://www.java2s.com/Code/Android/2D-Graphics/brighteracolor.htm
+     *
+     * @param factor
+     */
+    public void brighten(double factor) {
+
+        int r = Color.red(toColor());
+        int b = Color.blue(toColor());
+        int g = Color.green(toColor());
+
+        if (r == 0 && b == 0 && g == 0) {
+            fromColor(Color.DKGRAY);
+        }
+
+        if (r < 3 && r != 0) {
+            r = 3;
+        } else {
+            r = (int) (r / factor);
+            r = (r > 255) ? 255 : r;
+        }
+
+        if (b < 3 && b != 0) {
+            b = 3;
+        } else {
+            b = (int) (b / .7);
+            b = (b > 255) ? 255 : b;
+        }
+
+        if (g < 3 && g != 0) {
+            g = 3;
+        } else {
+            g = (int) (g / .7);
+            g = (g > 255) ? 255 : g;
+        }
+
+        fromColor(Color.rgb(r, g, b));
+
+    }
+
+    public void darken(double factor) {
+        int r = Color.red(toColor());
+        int b = Color.blue(toColor());
+        int g = Color.green(toColor());
+
+        fromColor(Color.rgb((int) (r * factor), (int) (g * factor), (int) (b * factor)));
+    }
+
+    public void darken() {
+        darken(0.9);
+    }
+
+    public void brighten() {
+        brighten(0.9);
     }
 
 }
