@@ -2,7 +2,6 @@ package com.tobiasschuerg.color.models;
 
 import android.graphics.Color;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 /**
  * Created by Tobias Schürg on 13.08.2016.
@@ -74,16 +73,19 @@ public abstract class AbstractColor<T> implements ColorModel<T>, Comparable<Abst
     }
 
 
+    /**
+     * Compares this color to another using {@link HSVColor} internally.
+     */
     @Override
     public int compareTo(@NonNull AbstractColor another) {
-        HSVColor hsv1 = new HSVColor().fromColor(this.toColor());
-        HSVColor hsv2 = new HSVColor().fromColor(another.toColor());
+        HSVColor hsv1 = this.toHSV();
+        HSVColor hsv2 = another.toHSV();
 
-        int c0 = Double.compare(hsv1.hue(), hsv2.hue());
+        int c0 = Double.compare(hsv1.getHue(), hsv2.getHue());
         if (c0 == 0) {
-            int c1 = Double.compare(hsv1.saturation(), hsv2.saturation());
+            int c1 = Double.compare(hsv1.getSaturation(), hsv2.getSaturation());
             if (c1 == 0) {
-                return Double.compare(hsv1.value(), hsv2.value());
+                return Double.compare(hsv1.getValue(), hsv2.getValue());
             } else {
                 return c1;
             }

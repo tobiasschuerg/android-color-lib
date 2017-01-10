@@ -1,6 +1,8 @@
 package com.tobiasschuerg.color.models;
 
 import android.graphics.Color;
+import android.support.annotation.ColorInt;
+import android.support.annotation.NonNull;
 
 /**
  * Created by Tobias Schürg on 13.08.2016.
@@ -18,7 +20,20 @@ public class HSVColor implements ColorModel<HSVColor> {
         value = v;
     }
 
+    public float getHue() {
+        return hue;
+    }
 
+    public float getSaturation() {
+        return saturation;
+    }
+
+    public float getValue() {
+        return value;
+    }
+
+
+    @NonNull
     @Override
     public HSVColor fromColor(int color) {
         float[] c = new float[3];
@@ -27,10 +42,18 @@ public class HSVColor implements ColorModel<HSVColor> {
     }
 
     @Override
+    @ColorInt
     public int toColor() {
         return Color.HSVToColor(new float[]{hue, saturation, value});
     }
 
+    @NonNull
+    @Override
+    public HSVColor toHSV() {
+        return this;
+    }
+
+    @NonNull
     @Override
     public HSVColor from(ColorModel other) {
         return fromColor(other.toColor());

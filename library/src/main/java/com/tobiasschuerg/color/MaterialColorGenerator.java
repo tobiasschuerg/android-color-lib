@@ -12,18 +12,17 @@ import java.util.ArrayList;
  * Created by Tobias Schürg on 13.08.2016.
  */
 
+@Deprecated
+// TODO: mrege with MaterialColor
 public class MaterialColorGenerator {
 
     private final Context context;
 
     public MaterialColorGenerator(Context context) {
         this.context = context;
-
-
     }
 
-
-    public static ArrayList<String> returnMaterialDesignColorSet(String colorHex) {
+    public static ArrayList<HSLColor> returnMaterialDesignColorSet(String colorHex) {
         ArrayList<HSLColor> resultList = new ArrayList<>();
         HSLColor hsl = new HSLColor((new HEXColor(colorHex)));
         hsl.lightness(0.5f);

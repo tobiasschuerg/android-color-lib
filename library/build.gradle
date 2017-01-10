@@ -1,14 +1,14 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven' // ADD THIS
 
-group='com.github.tobiasschuerg'
+group = 'com.github.tobiasschuerg'
 
 android {
-    compileSdkVersion 24
+    compileSdkVersion 25
     buildToolsVersion "24.0.3"
 
     defaultConfig {
-        minSdkVersion 1
+        minSdkVersion 9
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -23,6 +23,7 @@ android {
 
 dependencies {
     compile 'com.android.support:support-v4:25.0.0'
+    compile 'com.android.support:design:25.1.0'
 }
 
 // build a jar with source files
@@ -32,7 +33,7 @@ task sourcesJar(type: Jar) {
 }
 
 task javadoc(type: Javadoc) {
-    failOnError  false
+    failOnError false
     source = android.sourceSets.main.java.sourceFiles
     classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
     classpath += configurations.compile

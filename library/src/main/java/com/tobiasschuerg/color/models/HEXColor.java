@@ -1,7 +1,8 @@
 package com.tobiasschuerg.color.models;
 
 import android.graphics.Color;
-import android.support.v4.graphics.ColorUtils;
+import android.support.annotation.ColorInt;
+import android.support.annotation.NonNull;
 
 /**
  * Created by Tobias Schürg on 13.08.2016.
@@ -9,20 +10,25 @@ import android.support.v4.graphics.ColorUtils;
 
 public class HEXColor implements ColorModel<HEXColor> {
 
+    @NonNull
     private final String hex;
+
+    @ColorInt
     private final int color;
 
-    public HEXColor(String hex) {
+    public HEXColor(@NonNull String hex) {
         this.hex = hex;
         this.color = Color.parseColor(hex);
     }
 
+    @NonNull
     @Override
     public HEXColor fromColor(int color) {
         return new HEXColor(String.format("#%06X", (0xFFFFFF & color)));
 
     }
 
+    @NonNull
     @Override
     public HEXColor from(ColorModel other) {
         return fromColor(other.toColor());
@@ -31,5 +37,11 @@ public class HEXColor implements ColorModel<HEXColor> {
     @Override
     public int toColor() {
         return color;
+    }
+
+    @NonNull
+    @Override
+    public HSVColor toHSV() {
+        return new HSVColor(0, 0, 0).fromColor(color);
     }
 }

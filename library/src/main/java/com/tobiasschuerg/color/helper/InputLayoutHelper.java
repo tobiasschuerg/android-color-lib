@@ -1,4 +1,4 @@
-package com.tobiasschuerg.color;
+package com.tobiasschuerg.color.helper;
 
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
@@ -14,6 +14,9 @@ import java.lang.reflect.Field;
 
 public class InputLayoutHelper {
 
+    /**
+     * Colors an {@link EditText} and its surrounding {@link TextInputLayout}.
+     */
     public static void setInputTextLayoutColor(EditText editText, TextInputLayout til, @ColorInt int color)
             throws NoSuchFieldException, IllegalAccessException {
 

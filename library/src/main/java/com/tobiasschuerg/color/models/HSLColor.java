@@ -1,12 +1,13 @@
 package com.tobiasschuerg.color.models;
 
+import android.support.annotation.NonNull;
 import android.support.v4.graphics.ColorUtils;
 
 /**
  * Created by Tobias Schürg on 13.08.2016.
  */
 
-public class HSLColor implements ColorModel<HSLColor> {
+public class HSLColor extends AbstractColor<HSLColor> {
 
     private float hue;
     private float saturation;
@@ -22,7 +23,12 @@ public class HSLColor implements ColorModel<HSLColor> {
         from(model);
     }
 
+    public HSLColor(int color) {
 
+    }
+
+
+    @NonNull
     @Override
     public HSLColor fromColor(int color) {
         float[] c = new float[3];
@@ -35,12 +41,24 @@ public class HSLColor implements ColorModel<HSLColor> {
         return ColorUtils.HSLToColor(new float[]{hue, saturation, lightness});
     }
 
+    @NonNull
+    @Override
+    public HSVColor toHSV() {
+        return new HSVColor(0, 0, 0).fromColor(toColor());
+    }
+
+    @NonNull
     @Override
     public HSLColor from(ColorModel other) {
         return fromColor(other.toColor());
     }
 
-    public void lightness(float lightness) {
+    public HSLColor lightness(float lightness) {
         this.lightness = lightness;
+        return this;
+    }
+
+    public float lightness() {
+        return lightness;
     }
 }
