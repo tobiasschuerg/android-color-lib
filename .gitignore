@@ -4,6 +4,7 @@
 /.idea/libraries
 /build
 /captures
+*.iml
 
 *.class
 
