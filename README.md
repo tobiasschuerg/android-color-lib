@@ -4,6 +4,8 @@
 
 Android library for quick and easy conversions between color spaces (RGB, HSV, HSL, etc...) and for creating a material color palette based on a single color.
 
+<img src="https://github.com/tobiasschuerg/android-color-lib/blob/master/device-2017-01-11-233006.png" width="300">
+
 ## Example code
 
 ### Conversion between color spaces
@@ -12,14 +14,16 @@ Android library for quick and easy conversions between color spaces (RGB, HSV, H
                         .toHSV().setSaturation(0.6f)
                                 .setHue(190f)
                         .toHSL().setLightness(0.5f);
+                        
+  tv.setTextColor(color.toColor());
 ```
 
 ### Generating Material Colors Programmatically
 ```
-  Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
   MaterialColor materialColor = MaterialColor.random(true);
+  Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
   toolbar.setBackgroundColor(materialColor.get500());
-  toolbar.setTitleTextColor(materialColor.getTextBlackWhite());
+  toolbar.setTitleTextColor( materialColor.getTextBlackWhite());
 
 ```
 
