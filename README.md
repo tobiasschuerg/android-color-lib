@@ -1,6 +1,6 @@
 [![master](https://jitpack.io/v/tobiasschuerg/android-color-lib.svg)](https://jitpack.io/#tobiasschuerg/android-color-lib)
 
-# Android Material Color Library
+# Android (Material) Color Library
 
 Android library for quick and easy **conversions between color spaces** (RGB, HSV, HSL, etc...) 
 and for creating a **material color palette** based on a single color.
