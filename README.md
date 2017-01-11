@@ -1,4 +1,4 @@
-[![Release](https://img.shields.io/github/release/jitpack/android-example.svg?label=Jitpack)](https://jitpack.io/#jitpack/android-example)
+[![master](https://jitpack.io/v/tobiasschuerg/android-color-lib.svg)](https://jitpack.io/#tobiasschuerg/android-color-lib)
 
 # Android Material Color Library
 
@@ -28,11 +28,11 @@ Android library for quick and easy conversions between color spaces (RGB, HSV, H
 ## Integration with gradle
 
 Example Android library project that works with jitpack.io.
-Also see the guide for [building Android projects](https://github.com/jitpack/jitpack.io/blob/master/ANDROID.md)
+
 
 https://jitpack.io/#jitpack/android-example
 
-Add it to your build.gradle with:
+**Step 1.** Add the JitPack repository to your build file
 ```gradle
 allprojects {
     repositories {
@@ -40,10 +40,12 @@ allprojects {
     }
 }
 ```
-and:
+**Step 2.** Add the dependency
 
 ```gradle
 dependencies {
-    compile 'com.github.jitpack:android-example:{latest version}'
+        compile 'com.github.tobiasschuerg:android-color-lib:-SNAPSHOT'
 }
 ```
+
+Also see the guide for [building Android projects](https://github.com/jitpack/jitpack.io/blob/master/ANDROID.md)
