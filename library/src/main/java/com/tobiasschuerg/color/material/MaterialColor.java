@@ -31,8 +31,8 @@ public class MaterialColor extends AbstractColor<MaterialColor> {
     }
 
     public MaterialColor(@ColorInt int color) {
-        this.hsl = new HSLColor(color);
-        this.initialLightness = hsl.lightness();
+        this.hsl = new HSLColor().fromColor(color);
+        this.initialLightness = hsl.setLightness();
         if (initialLightness > 0.6f || initialLightness < 0.4f) {
             // Log.w("MaterialColor", "Lightness (" + initialLightness + ")  not optimal");
             if (initialLightness < 0.1) {
@@ -49,25 +49,25 @@ public class MaterialColor extends AbstractColor<MaterialColor> {
      * 79% light
      */
     public int get100() {
-        return hsl.lightness(initialLightness * 1.79f).toColor();
+        return hsl.setLightness(initialLightness * 1.79f).toColor();
     }
 
     /**
      * 33% light
      */
     public int get300() {
-        return hsl.lightness(initialLightness * 1.333f).toColor();
+        return hsl.setLightness(initialLightness * 1.333f).toColor();
     }
 
     public int get500() {
-        return hsl.lightness(initialLightness).toColor();
+        return hsl.setLightness(initialLightness).toColor();
     }
 
     /**
      * 42% dark
      */
     public int get700() {
-        return hsl.lightness(initialLightness * 0.58f).toColor();
+        return hsl.setLightness(initialLightness * 0.58f).toColor();
     }
 
     /**
@@ -80,10 +80,11 @@ public class MaterialColor extends AbstractColor<MaterialColor> {
     }
 
     public int get900() {
-        return hsl.lightness(0.1f).toColor();
+        return hsl.setLightness(0.1f).toColor();
     }
 
-    private HSLColor toHSL() {
+    @NonNull
+    public HSLColor toHSL() {
         return hsl;
     }
 

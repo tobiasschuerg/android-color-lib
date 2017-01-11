@@ -1,5 +1,6 @@
 package com.tobiasschuerg.color.models;
 
+import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.v4.graphics.ColorUtils;
 
@@ -23,14 +24,13 @@ public class HSLColor extends AbstractColor<HSLColor> {
         from(model);
     }
 
-    public HSLColor(int color) {
+    public HSLColor() {
 
     }
 
-
     @NonNull
     @Override
-    public HSLColor fromColor(int color) {
+    public HSLColor fromColor(@ColorInt int color) {
         float[] c = new float[3];
         ColorUtils.colorToHSL(color, c);
         return new HSLColor(c[0], c[1], c[2]);
@@ -39,6 +39,12 @@ public class HSLColor extends AbstractColor<HSLColor> {
     @Override
     public int toColor() {
         return ColorUtils.HSLToColor(new float[]{hue, saturation, lightness});
+    }
+
+    @NonNull
+    @Override
+    public HSLColor toHSL() {
+        return this;
     }
 
     @NonNull
@@ -53,12 +59,12 @@ public class HSLColor extends AbstractColor<HSLColor> {
         return fromColor(other.toColor());
     }
 
-    public HSLColor lightness(float lightness) {
+    public HSLColor setLightness(float lightness) {
         this.lightness = lightness;
         return this;
     }
 
-    public float lightness() {
+    public float setLightness() {
         return lightness;
     }
 }

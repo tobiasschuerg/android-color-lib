@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/android-color-lib.iml" filepath="$PROJECT_DIR$/android-color-lib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/colorsample/colorsample.iml" filepath="$PROJECT_DIR$/colorsample/colorsample.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
     </modules>
   </component>

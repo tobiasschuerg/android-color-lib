@@ -25,7 +25,7 @@ public class MaterialColorGenerator {
     public static ArrayList<HSLColor> returnMaterialDesignColorSet(String colorHex) {
         ArrayList<HSLColor> resultList = new ArrayList<>();
         HSLColor hsl = new HSLColor((new HEXColor(colorHex)));
-        hsl.lightness(0.5f);
+        hsl.setLightness(0.5f);
         double randomMid = randomWithRange(0.48, 0.52);
 
         resultList.add(hsl);

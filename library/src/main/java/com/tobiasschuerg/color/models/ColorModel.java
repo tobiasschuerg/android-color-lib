@@ -19,6 +19,9 @@ public interface ColorModel<T> {
     int toColor();
 
     @NonNull
+    HSLColor toHSL();
+
+    @NonNull
     HSVColor toHSV();
 
 }

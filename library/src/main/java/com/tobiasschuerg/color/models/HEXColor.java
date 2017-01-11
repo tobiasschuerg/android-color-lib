@@ -5,6 +5,10 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 
 /**
+ * Hue
+ * Saturation
+ * Value / Brightness
+ * <p>
  * Created by Tobias Schürg on 13.08.2016.
  */
 
@@ -37,6 +41,12 @@ public class HEXColor implements ColorModel<HEXColor> {
     @Override
     public int toColor() {
         return color;
+    }
+
+    @NonNull
+    @Override
+    public HSLColor toHSL() {
+        return new HSLColor().fromColor(toColor());
     }
 
     @NonNull

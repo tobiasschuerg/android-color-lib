@@ -20,18 +20,50 @@ public class HSVColor implements ColorModel<HSVColor> {
         value = v;
     }
 
+    /**
+     * @return Hue [0 .. 360)
+     */
     public float getHue() {
         return hue;
     }
 
+    /**
+     * @param hue Hue [0 .. 360)
+     */
+    public HSVColor setHue(float hue) {
+        this.hue = hue;
+        return this;
+    }
+
+    /**
+     * @return Saturation [0...1]
+     */
     public float getSaturation() {
         return saturation;
     }
 
+    /**
+     * @param saturation Saturation [0...1]
+     */
+    public HSVColor setSaturation(float saturation) {
+        this.saturation = saturation;
+        return this;
+    }
+
+    /**
+     * @return Value [0...1]
+     */
     public float getValue() {
         return value;
     }
 
+    /**
+     * @param value Value [0...1]
+     */
+    public HSVColor setValue(float value) {
+        this.value = value;
+        return this;
+    }
 
     @NonNull
     @Override
@@ -45,6 +77,12 @@ public class HSVColor implements ColorModel<HSVColor> {
     @ColorInt
     public int toColor() {
         return Color.HSVToColor(new float[]{hue, saturation, value});
+    }
+
+    @NonNull
+    @Override
+    public HSLColor toHSL() {
+        return new HSLColor().fromColor(toColor());
     }
 
     @NonNull
