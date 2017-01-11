@@ -2,7 +2,8 @@
 
 # Android Material Color Library
 
-Android library for quick and easy conversions between color spaces (RGB, HSV, HSL, etc...) and for creating a material color palette based on a single color.
+Android library for quick and easy **conversions between color spaces** (RGB, HSV, HSL, etc...) 
+and for creating a **material color palette** based on a single color.
 
 <img src="https://github.com/tobiasschuerg/android-color-lib/blob/master/device-2017-01-11-233006.png" width="300">
 
