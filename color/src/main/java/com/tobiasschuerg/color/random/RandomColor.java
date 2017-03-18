@@ -10,11 +10,11 @@ import java.util.List;
 public class RandomColor {
     private static final String TAG = "RandomColor";
 
-    public static enum SaturationType {
+    public enum SaturationType {
         RANDOM, MONOCHROME
     }
 
-    public static enum Luminosity {
+    public enum Luminosity {
         BRIGHT, LIGHT, DARK, RANDOM
     }
 
@@ -408,7 +408,7 @@ public class RandomColor {
         );
     }
 
-    public static enum Color {
+    public enum Color {
         MONOCHROME, RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE, PINK
     }
 }
