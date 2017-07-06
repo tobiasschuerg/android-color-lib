@@ -68,8 +68,7 @@ public class RandomColor {
         int saturation = pickSaturation(hue, saturationType, luminosity);
         int brightness = pickBrightness(hue, saturation, luminosity);
 
-        int color = getColor(hue, saturation, brightness);
-        return color;
+        return getColor(hue, saturation, brightness);
     }
 
     public int[] randomColor(int count) {
@@ -90,8 +89,7 @@ public class RandomColor {
         int saturation = pickSaturation(color, null, null);
         int brightness = pickBrightness(color, saturation, null);
 
-        int colorValue = getColor(hue, saturation, brightness);
-        return colorValue;
+        return getColor(hue, saturation, brightness);
     }
 
     public int[] random(Color color, int count) {

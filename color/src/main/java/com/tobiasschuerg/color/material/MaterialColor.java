@@ -42,7 +42,7 @@ public class MaterialColor extends AbstractColor<MaterialColor> {
     }
 
     public static MaterialColor random(boolean onlyOfficialColors) {
-        return new MaterialColor(ColorCreator.getRandomColor());
+        return new MaterialColor(ColorCreator.INSTANCE.randomColor());
     }
 
     /**
