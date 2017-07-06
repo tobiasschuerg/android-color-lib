@@ -1,1 +1,1 @@
-include ':library', ':colorsample'
+include ':color', ':colorsample'

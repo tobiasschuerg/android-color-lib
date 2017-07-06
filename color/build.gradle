@@ -1,5 +1,7 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 apply plugin: 'com.github.dcendents.android-maven' // ADD THIS
+apply plugin: 'kotlin-android-extensions'
 
 group = 'com.github.tobiasschuerg'
 
@@ -22,8 +24,9 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:25.3.1'
-    compile 'com.android.support:design:25.3.1'
+    compile 'com.android.support:support-v4:25.4.0'
+    compile 'com.android.support:design:25.4.0'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 }
 
 // build a jar with source files
@@ -48,6 +51,9 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 artifacts {
     archives sourcesJar
     archives javadocJar
+}
+repositories {
+    mavenCentral()
 }
 
 // uncomment to build a jar file in addition to the default aar file
