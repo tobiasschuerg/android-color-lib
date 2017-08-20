@@ -10,7 +10,7 @@ object ColorCreator {
     /*
     Returns a random color
      */
-    fun randomColor() = getRandomColors(1)[0]
+    fun randomColor() = getRandomColors(1).first()
 
     /**
      * Returns an array of count random color values
