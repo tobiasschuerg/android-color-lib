@@ -9,14 +9,13 @@ import android.widget.EditText;
 import java.lang.reflect.Field;
 
 /**
+ * Colors an {@link EditText} and its surrounding {@link TextInputLayout}.
+ * <p>
  * Created by Tobias Schürg on 13.08.2016.
  */
 
 public class InputLayoutHelper {
 
-    /**
-     * Colors an {@link EditText} and its surrounding {@link TextInputLayout}.
-     */
     public static void setInputTextLayoutColor(EditText editText, TextInputLayout til, @ColorInt int color)
             throws NoSuchFieldException, IllegalAccessException {
 
