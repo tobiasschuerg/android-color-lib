@@ -23,7 +23,12 @@ class MainActivity : AppCompatActivity() {
         setStatusBarColor(materialColor.get700())
 
 
-        val color = HEXColor("#ffff0000").toHSV().setSaturation(0.6f).setHue(190f).toHSL().setLightness(0.5f)
+        val color = HEXColor("#ffff0000")
+                .toHSV()
+                .copy(saturation = 0.6f)
+                .copy(hue = 190f)
+                .toHSL()
+                .copy(lightness = 0.5f)
         hello.setTextColor(color.toColor())
     }
 
