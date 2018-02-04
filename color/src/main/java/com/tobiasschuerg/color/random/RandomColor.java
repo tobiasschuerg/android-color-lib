@@ -1,5 +1,7 @@
 package com.tobiasschuerg.color.random;
 
+import android.support.annotation.Nullable;
+
 import com.tobiasschuerg.color.models.HSVColor;
 
 import java.util.ArrayList;
@@ -10,49 +12,6 @@ import java.util.List;
  * Created by bruce on 15/2/5.
  */
 public class RandomColor {
-    private static final String TAG = "RandomColor";
-
-    public enum SaturationType {
-        RANDOM,
-        MONOCHROME
-    }
-
-    public enum Luminosity {
-        BRIGHT,
-        LIGHT,
-        DARK,
-        RANDOM
-    }
-
-    public static class Options {
-        int            hue;
-        SaturationType saturationType;
-        Luminosity     luminosity;
-
-        public int getHue() {
-            return hue;
-        }
-
-        public void setHue(int hue) {
-            this.hue = hue;
-        }
-
-        public SaturationType getSaturationType() {
-            return saturationType;
-        }
-
-        public void setSaturationType(SaturationType saturationType) {
-            this.saturationType = saturationType;
-        }
-
-        public Luminosity getLuminosity() {
-            return luminosity;
-        }
-
-        public void setLuminosity(Luminosity luminosity) {
-            this.luminosity = luminosity;
-        }
-    }
 
     private HashMap<String, ColorInfo> colors = new HashMap<>();
 
@@ -61,19 +20,14 @@ public class RandomColor {
     }
 
     public HSVColor randomColor() {
-        return randomColor(0, null, null);
-    }
-
-    public HSVColor randomColor(int value, SaturationType saturationType, Luminosity luminosity) {
-        int hue = value;
-        hue = pickHue(hue);
-        int saturation = pickSaturation(hue, saturationType, luminosity);
-        int brightness = pickBrightness(hue, saturation, luminosity);
+        int hue = pickHue();
+        int saturation = pickSaturation(hue);
+        int brightness = pickBrightness(hue, saturation);
 
         return new HSVColor(hue, saturation, brightness);
     }
 
-    public HSVColor[] randomColor(int count) {
+    public HSVColor[] randomColors(int count) {
         if (count <= 0) {
             throw new IllegalArgumentException("count must be greater than 0");
         }
@@ -88,7 +42,7 @@ public class RandomColor {
 
     public HSVColor randomColor(Color color) {
         int hue = pickHue(color.name());
-        int saturation = pickSaturation(color, null, null);
+        int saturation = pickSaturation(color);
         int brightness = pickBrightness(color, saturation, null);
 
         return new HSVColor(hue, saturation, brightness);
@@ -107,15 +61,15 @@ public class RandomColor {
         return colors;
     }
 
-    private int pickHue(int hue) {
-        Range hueRange = getHueRange(hue);
+    private int pickHue() {
+        Range hueRange = new Range(0, 360);
         return doPickHue(hueRange);
     }
 
     private int doPickHue(Range hueRange) {
         int hue = randomWithin(hueRange);
 
-        // Instead of storing red as two seperate ranges,
+        // Instead of storing red as two separate ranges,
         // we group them, using negative numbers
         if (hue < 0) {
             hue = 360 + hue;
@@ -129,14 +83,6 @@ public class RandomColor {
         return doPickHue(hueRange);
     }
 
-    private Range getHueRange(int number) {
-        if (number < 360 && number > 0) {
-            return new Range(number, number);
-        }
-
-        return new Range(0, 360);
-    }
-
     private Range getHueRange(String name) {
         if (colors.containsKey(name)) {
             return colors.get(name).getHueRange();
@@ -145,16 +91,16 @@ public class RandomColor {
         return new Range(0, 360);
     }
 
-    private int pickSaturation(int hue, SaturationType saturationType, Luminosity luminosity) {
-        return pickSaturation(getColorInfo(hue), saturationType, luminosity);
+    private int pickSaturation(int hue) {
+        return pickSaturation(getColorInfo(hue), null, null);
     }
 
-    private int pickSaturation(Color color, SaturationType saturationType, Luminosity luminosity) {
+    private int pickSaturation(Color color) {
         ColorInfo colorInfo = colors.get(color.name());
-        return pickSaturation(colorInfo, saturationType, luminosity);
+        return pickSaturation(colorInfo, null, null);
     }
 
-    private int pickSaturation(ColorInfo colorInfo, SaturationType saturationType, Luminosity luminosity) {
+    private int pickSaturation(ColorInfo colorInfo, @Nullable SaturationType saturationType, @Nullable Luminosity luminosity) {
         if (saturationType != null) {
             switch (saturationType) {
                 case RANDOM:
@@ -170,8 +116,8 @@ public class RandomColor {
 
         Range saturationRange = colorInfo.getSaturationRange();
 
-        int min = saturationRange.start;
-        int max = saturationRange.end;
+        int min = saturationRange.getStart();
+        int max = saturationRange.getEnd();
 
         if (luminosity != null) {
             switch (luminosity) {
@@ -190,10 +136,9 @@ public class RandomColor {
         return randomWithin(new Range(min, max));
     }
 
-    private int pickBrightness(int hue, int saturation, Luminosity luminosity) {
+    private int pickBrightness(int hue, int saturation) {
         ColorInfo colorInfo = getColorInfo(hue);
-
-        return pickBrightness(colorInfo, saturation, luminosity);
+        return pickBrightness(colorInfo, saturation, null);
     }
 
     private int pickBrightness(Color color, int saturation, Luminosity luminosity) {
@@ -235,14 +180,14 @@ public class RandomColor {
         List<Range> lowerBounds = colorInfo.getLowerBounds();
         for (int i = 0; i < lowerBounds.size() - 1; i++) {
 
-            int s1 = lowerBounds.get(i).start,
-                    v1 = lowerBounds.get(i).end;
+            int s1 = lowerBounds.get(i).getStart(),
+                    v1 = lowerBounds.get(i).getEnd();
 
             if (i == lowerBounds.size() - 1) {
                 break;
             }
-            int s2 = lowerBounds.get(i + 1).start,
-                    v2 = lowerBounds.get(i + 1).end;
+            int s2 = lowerBounds.get(i + 1).getStart();
+            int v2 = lowerBounds.get(i + 1).getEnd();
 
             if (saturation >= s1 && saturation <= s2) {
 
@@ -265,7 +210,7 @@ public class RandomColor {
 
         for (String key : colors.keySet()) {
             ColorInfo colorInfo = colors.get(key);
-            if (colorInfo.getHueRange() != null && colorInfo.getHueRange().contain(hue)) {
+            if (colorInfo.getHueRange() != null && colorInfo.getHueRange().contains(hue)) {
                 return colorInfo;
             }
         }
@@ -274,14 +219,14 @@ public class RandomColor {
     }
 
     private int randomWithin(Range range) {
-        return (int) Math.floor(range.start + Math.random() * (range.end + 1 - range.start));
+        return (int) Math.floor(range.getStart() + Math.random() * (range.getEnd() + 1 - range.getStart()));
     }
 
-    public void defineColor(String name, Range hueRange, List<Range> lowerBounds) {
-        int sMin = lowerBounds.get(0).start;
-        int sMax = lowerBounds.get(lowerBounds.size() - 1).start;
-        int bMin = lowerBounds.get(lowerBounds.size() - 1).end;
-        int bMax = lowerBounds.get(0).end;
+    public void defineColor(String name, @Nullable Range hueRange, List<Range> lowerBounds) {
+        int sMin = lowerBounds.get(0).getStart();
+        int sMax = lowerBounds.get(lowerBounds.size() - 1).getStart();
+        int bMin = lowerBounds.get(lowerBounds.size() - 1).getEnd();
+        int bMax = lowerBounds.get(0).getEnd();
 
         colors.put(name, new ColorInfo(hueRange, new Range(sMin, sMax), new Range(bMin, bMax), lowerBounds));
     }
@@ -312,7 +257,7 @@ public class RandomColor {
                 lowerBounds2
         );
 
-        List<Range> lowerBounds3 = new ArrayList<Range>();
+        List<Range> lowerBounds3 = new ArrayList<>();
         lowerBounds3.add(new Range(20, 100));
         lowerBounds3.add(new Range(30, 93));
         lowerBounds3.add(new Range(40, 88));
@@ -408,14 +353,4 @@ public class RandomColor {
         );
     }
 
-    public enum Color {
-        MONOCHROME,
-        RED,
-        ORANGE,
-        YELLOW,
-        GREEN,
-        BLUE,
-        PURPLE,
-        PINK
-    }
 }

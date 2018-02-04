@@ -18,17 +18,17 @@ object ColorCreator {
      */
     fun getRandomColors(count: Int): Array<out HSVColor> {
         val randomColor = RandomColor()
-        return randomColor.randomColor(count)
+        return randomColor.randomColors(count)
     }
 
 
-    /*
-       Returns an array of ten green colors
-     */
-    fun getSimilarRandomColors(color: RandomColor.Color, count: Int): Array<out HSVColor> {
-        val randomColor = RandomColor()
-        return randomColor.random(color, count)
-    }
+//    /*
+//       Returns an array of ten green colors
+//     */
+//    fun getSimilarRandomColors(color: Color, count: Int): Array<out HSVColor> {
+//        val randomColor = RandomColor()
+//        return randomColor.random(color, count)
+//    }
 }
 
 
