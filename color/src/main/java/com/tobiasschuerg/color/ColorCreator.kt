@@ -1,6 +1,7 @@
 package com.tobiasschuerg.color
 
 import com.tobiasschuerg.color.models.HSVColor
+import com.tobiasschuerg.color.random.Color
 import com.tobiasschuerg.color.random.RandomColor
 
 /**
@@ -11,24 +12,20 @@ object ColorCreator {
     /*
     Returns a random color
      */
-    fun randomColor() = getRandomColors(1)[0]
+    fun randomColor() = RandomColor.randomColor()
 
     /**
      * Returns an array of count random color values
      */
-    fun getRandomColors(count: Int): Array<out HSVColor> {
-        val randomColor = RandomColor()
-        return randomColor.randomColors(count)
+    fun getRandomColors(count: Int): List<HSVColor> = RandomColor.randomColors(count)
+
+
+    /*
+       Returns an array of ten green colors
+     */
+    internal fun getSimilarRandomColors(color: Color, count: Int): List<HSVColor> {
+        return RandomColor.random(color, count)
     }
-
-
-//    /*
-//       Returns an array of ten green colors
-//     */
-//    fun getSimilarRandomColors(color: Color, count: Int): Array<out HSVColor> {
-//        val randomColor = RandomColor()
-//        return randomColor.random(color, count)
-//    }
 }
 
 
