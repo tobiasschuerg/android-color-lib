@@ -4,6 +4,9 @@ import com.tobiasschuerg.color.models.HSVColor
 import java.util.*
 
 /**
+ * Creates a random color.
+ *
+ *
  * Created by bruce on 15/2/5.
  */
 object RandomColor {

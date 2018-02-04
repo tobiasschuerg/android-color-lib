@@ -4,6 +4,8 @@ import android.graphics.Color
 import android.support.annotation.ColorInt
 
 /**
+ * Hue, saturation, value.
+ *
  * Created by Tobias Schürg on 13.08.2016.
  */
 
