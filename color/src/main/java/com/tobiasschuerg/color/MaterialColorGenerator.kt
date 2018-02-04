@@ -16,7 +16,7 @@ object MaterialColorGenerator {
     fun returnMaterialDesignColorSet(colorHex: String): ArrayList<HSLColor> {
         val resultList = ArrayList<HSLColor>()
         val hexColor = HEXColor(colorHex)
-        val hsl = HSLColor.from(hexColor).copy(lightness = 0.5f)
+        val hsl = HSLColor(hexColor).copy(lightness = 0.5f)
         val randomMid = randomWithRange(0.48, 0.52)
 
         resultList.add(hsl)

@@ -1,13 +1,7 @@
 package com.tobiasschuerg.color.material
 
-import android.graphics.Color
-import android.support.annotation.ColorInt
-
-import com.tobiasschuerg.color.ColorCreator
-import com.tobiasschuerg.color.models.AbstractColor
 import com.tobiasschuerg.color.models.ColorModel
 import com.tobiasschuerg.color.models.HSLColor
-import com.tobiasschuerg.color.models.HSVColor
 
 /**
  * Internally uses the [HSLColor] color model.
@@ -19,72 +13,47 @@ import com.tobiasschuerg.color.models.HSVColor
  * Inspired by https://stackoverflow.com/questions/28012185/what-are-the-ways-to-programmatically-generate-material-design-color-sets
  */
 
-class MaterialColor(@ColorInt color: Int) : AbstractColor<MaterialColor>() {
+class MaterialColor(val hsl: HSLColor) : ColorModel() {
 
-    private val hsl: HSLColor
+    constructor(color: ColorModel) : this(color.toHSL())
 
     private var initialLightness: Float
 
-    /**
-     * 79% light
-     */
-    fun get100(): Int = hsl.copy(lightness = initialLightness * 1.79f).toColor()
-
-    /**
-     * 33% light
-     */
-    fun get300(): Int = hsl.copy(lightness = initialLightness * 1.333f).toColor()
-
-    fun get500(): Int = hsl.copy(lightness = initialLightness).toColor()
-
-    /**
-     * 42% dark
-     */
-    fun get700(): Int = hsl.copy(lightness = initialLightness * 0.58f).toColor()
-
-    /**
-     * Estimates the best fitting text color if this color is used as background to draw on.
-     *
-     * @return black or white
-     */
-    val textBlackWhite: Int
-        get() = hsl.getForeGroundColor(AbstractColor.ColorPreference.WHITE)
-
-    fun get900(): Int = hsl.copy(lightness = 0.1f).toColor()
-
-    constructor(hex: String) : this(Color.parseColor(hex)) {}
-
     init {
-        this.hsl = HSLColor.fromColor(color)
         this.initialLightness = hsl.lightness
-        if (initialLightness > 0.6f || initialLightness < 0.4f) {
-            // Log.w("MaterialColor", "Lightness (" + initialLightness + ")  not optimal");
-            if (initialLightness < 0.1) {
-                initialLightness = 0.25f
-            }
+        if (initialLightness < 0.1) {
+            // lightness not optimal, so we increase
+            initialLightness = 0.25f
         }
     }
 
-    override fun toHSL(): HSLColor {
-        return hsl
-    }
+    /* 100 - 79% light  */
+    fun get100(): HSLColor = hsl.copy(lightness = initialLightness * 1.79f)
 
-    override fun toColor(): Int {
-        return hsl.toColor()
-    }
+    /* 200 - 56% light  */
+    fun get200(): HSLColor = hsl.copy(lightness = initialLightness * 1.56f)
 
-    override fun toHSV(): HSVColor {
-        return hsl.toHSV()
-    }
+    /* 300 - 33% light  */
+    fun get300(): HSLColor = hsl.copy(lightness = initialLightness * 1.333f)
 
-    companion object {
+    /* 400 - 16% light  */
+    fun get400(): HSLColor = hsl.copy(lightness = initialLightness * 1.16f)
 
-        fun random(onlyOfficialColors: Boolean): MaterialColor {
-            return MaterialColor(ColorCreator.randomColor())
-        }
+    /* 500 - Primary */
+    fun get500(): HSLColor = hsl.copy(lightness = initialLightness)
 
-        fun from(other: ColorModel<*>): MaterialColor {
-            return MaterialColor(other.toColor())
-        }
-    }
+    /* 600 - 18% dark */
+    fun get600(): HSLColor = hsl.copy(lightness = initialLightness * 0.82f)
+
+    /* 700 - 42% dark */
+    fun get700(): HSLColor = hsl.copy(lightness = initialLightness * 0.58f)
+
+    /* 800 - 62% dark */
+    fun get800(): HSLColor = hsl.copy(lightness = initialLightness * 0.38f)
+
+    /* 900 - Dark */
+    fun get900(): HSLColor = hsl.copy(lightness = initialLightness * 0.19f)
+
+    override fun toColor(): Int = hsl.toColor()
+
 }

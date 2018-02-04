@@ -1,6 +1,5 @@
 package com.tobiasschuerg.color.models
 
-import android.support.annotation.ColorInt
 import android.support.v4.graphics.ColorUtils
 
 /**
@@ -13,32 +12,20 @@ data class HSLColor(
         val hue: Float,
         val saturation: Float,
         val lightness: Float
-) : AbstractColor<HSLColor>() {
+) : ColorModel() {
+
+    constructor(colorModel: ColorModel) : this(colorModel.toHslArray())
+
+    constructor(hsl: FloatArray) : this(hsl[0], hsl[1], hsl[2])
 
     override fun toColor(): Int {
         return ColorUtils.HSLToColor(floatArrayOf(hue, saturation, lightness))
     }
 
-    override fun toHSL(): HSLColor {
-        return this
-    }
+}
 
-    override fun toHSV(): HSVColor {
-        return HSVColor.fromColor(toColor())
-    }
-
-    companion object {
-
-        fun from(other: ColorModel<*>): HSLColor {
-            return fromColor(other.toColor())
-        }
-
-        fun fromColor(@ColorInt color: Int): HSLColor {
-            val c = FloatArray(3)
-            ColorUtils.colorToHSL(color, c)
-            return HSLColor(c[0], c[1], c[2])
-        }
-    }
-
-
+private fun ColorModel.toHslArray(): FloatArray {
+    val c = FloatArray(3)
+    ColorUtils.colorToHSL(this.toColor(), c)
+    return c
 }

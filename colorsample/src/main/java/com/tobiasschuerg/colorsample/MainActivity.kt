@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.support.annotation.ColorInt
 import android.support.v7.app.AppCompatActivity
 import android.view.WindowManager
+import com.tobiasschuerg.color.ColorCreator
 import com.tobiasschuerg.color.material.MaterialColor
 import com.tobiasschuerg.color.models.HEXColor
+import com.tobiasschuerg.color.models.getTextBlackWhite
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -16,11 +18,11 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
 
-        val materialColor = MaterialColor.random(true)
-        toolbar.setBackgroundColor(materialColor.get500())
-        toolbar.setTitleTextColor(materialColor.textBlackWhite)
+        val materialColor: MaterialColor = MaterialColor(ColorCreator.randomColor())
+        toolbar.setBackgroundColor(materialColor.get500().toColor())
+        toolbar.setTitleTextColor(materialColor.getTextBlackWhite())
 
-        setStatusBarColor(materialColor.get700())
+        setStatusBarColor(materialColor.get700().toColor())
 
 
         val color = HEXColor("#ffff0000")

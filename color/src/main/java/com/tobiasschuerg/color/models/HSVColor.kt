@@ -11,35 +11,21 @@ data class HSVColor(
         val hue: Float,
         val saturation: Float,
         val value: Float
-) : ColorModel<HSVColor> {
+) : ColorModel() {
+
+    constructor(color: ColorModel) : this(color.toHsvArray())
+
+    constructor(hsvArray: FloatArray) : this(hsvArray[0], hsvArray[1], hsvArray[2])
 
     @ColorInt
     override fun toColor(): Int {
         return Color.HSVToColor(floatArrayOf(hue, saturation, value))
     }
 
-    override fun toHSL(): HSLColor {
-        return HSLColor.fromColor(toColor())
-    }
+}
 
-    override fun toHSV(): HSVColor {
-        return this
-    }
-
-    companion object {
-
-
-        fun fromColor(color: Int): HSVColor {
-            val c = FloatArray(3)
-            Color.colorToHSV(color, c)
-            return HSVColor(c[0], c[1], c[2])
-        }
-
-        fun from(other: ColorModel<*>): HSVColor {
-            return fromColor(other.toColor())
-        }
-
-    }
-
-
+private fun ColorModel.toHsvArray(): FloatArray {
+    val hsvArray = FloatArray(3)
+    Color.colorToHSV(this.toColor(), hsvArray)
+    return hsvArray
 }

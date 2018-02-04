@@ -1,5 +1,7 @@
 package com.tobiasschuerg.color.random;
 
+import com.tobiasschuerg.color.models.HSVColor;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,17 +13,21 @@ public class RandomColor {
     private static final String TAG = "RandomColor";
 
     public enum SaturationType {
-        RANDOM, MONOCHROME
+        RANDOM,
+        MONOCHROME
     }
 
     public enum Luminosity {
-        BRIGHT, LIGHT, DARK, RANDOM
+        BRIGHT,
+        LIGHT,
+        DARK,
+        RANDOM
     }
 
     public static class Options {
-        int hue;
+        int            hue;
         SaturationType saturationType;
-        Luminosity luminosity;
+        Luminosity     luminosity;
 
         public int getHue() {
             return hue;
@@ -54,29 +60,25 @@ public class RandomColor {
         loadColorBounds();
     }
 
-    private int getColor(int hue, int saturation, int brightness) {
-        return android.graphics.Color.HSVToColor(new float[]{hue, saturation, brightness});
-    }
-
-    public int randomColor() {
+    public HSVColor randomColor() {
         return randomColor(0, null, null);
     }
 
-    public int randomColor(int value, SaturationType saturationType, Luminosity luminosity) {
+    public HSVColor randomColor(int value, SaturationType saturationType, Luminosity luminosity) {
         int hue = value;
         hue = pickHue(hue);
         int saturation = pickSaturation(hue, saturationType, luminosity);
         int brightness = pickBrightness(hue, saturation, luminosity);
 
-        return getColor(hue, saturation, brightness);
+        return new HSVColor(hue, saturation, brightness);
     }
 
-    public int[] randomColor(int count) {
+    public HSVColor[] randomColor(int count) {
         if (count <= 0) {
             throw new IllegalArgumentException("count must be greater than 0");
         }
 
-        int[] colors = new int[count];
+        HSVColor[] colors = new HSVColor[count];
         for (int i = 0; i < count; i++) {
             colors[i] = randomColor();
         }
@@ -84,20 +86,20 @@ public class RandomColor {
         return colors;
     }
 
-    public int randomColor(Color color) {
+    public HSVColor randomColor(Color color) {
         int hue = pickHue(color.name());
         int saturation = pickSaturation(color, null, null);
         int brightness = pickBrightness(color, saturation, null);
 
-        return getColor(hue, saturation, brightness);
+        return new HSVColor(hue, saturation, brightness);
     }
 
-    public int[] random(Color color, int count) {
+    public HSVColor[] random(Color color, int count) {
         if (count <= 0) {
             throw new IllegalArgumentException("count must be greater than 0");
         }
 
-        int[] colors = new int[count];
+        HSVColor[] colors = new HSVColor[count];
         for (int i = 0; i < count; i++) {
             colors[i] = randomColor(color);
         }
@@ -407,6 +409,13 @@ public class RandomColor {
     }
 
     public enum Color {
-        MONOCHROME, RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE, PINK
+        MONOCHROME,
+        RED,
+        ORANGE,
+        YELLOW,
+        GREEN,
+        BLUE,
+        PURPLE,
+        PINK
     }
 }
