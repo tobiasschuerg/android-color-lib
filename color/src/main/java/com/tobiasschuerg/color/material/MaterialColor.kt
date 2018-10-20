@@ -13,7 +13,7 @@ import com.tobiasschuerg.color.models.HSLColor
  * Inspired by https://stackoverflow.com/questions/28012185/what-are-the-ways-to-programmatically-generate-material-design-color-sets
  */
 
-class MaterialColor(val hsl: HSLColor) : ColorModel() {
+class MaterialColor(private val hsl: HSLColor) : ColorModel() {
 
     constructor(color: ColorModel) : this(color.toHSL())
 

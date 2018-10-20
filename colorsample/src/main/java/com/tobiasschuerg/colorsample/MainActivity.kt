@@ -1,11 +1,14 @@
 package com.tobiasschuerg.colorsample
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.annotation.ColorInt
 import android.support.v7.app.AppCompatActivity
 import android.view.WindowManager
 import com.tobiasschuerg.color.ColorCreator
+import com.tobiasschuerg.color.helper.setAccentColor
 import com.tobiasschuerg.color.material.MaterialColor
+import com.tobiasschuerg.color.models.ColorModel
 import com.tobiasschuerg.color.models.HEXColor
 import com.tobiasschuerg.color.models.getTextBlackWhite
 import kotlinx.android.synthetic.main.activity_main.*
@@ -18,20 +21,31 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
 
-        val materialColor: MaterialColor = MaterialColor(ColorCreator.randomColor())
-        toolbar.setBackgroundColor(materialColor.get500().toColor())
+        val materialColor = MaterialColor(ColorCreator.randomColor())
+        val color1 = materialColor.get500()
+        toolbar.setBackgroundColor(color1.toColor())
         toolbar.setTitleTextColor(materialColor.getTextBlackWhite())
 
         setStatusBarColor(materialColor.get700().toColor())
 
 
-        val color = HEXColor("#ffff0000")
+        val color: ColorModel = HEXColor("#ffaabbff")
                 .toHSV()
                 .copy(saturation = 0.6f)
                 .copy(hue = 190f)
                 .toHSL()
                 .copy(lightness = 0.5f)
         hello.setTextColor(color.toColor())
+
+
+        first_name_layout.setAccentColor(color1.toColor())
+        last_name_layout.setAccentColor(color1.toColor())
+
+
+        restart_button.setOnClickListener {
+            startActivity(Intent(applicationContext, MainActivity::class.java))
+            finish()
+        }
     }
 
     private fun setStatusBarColor(@ColorInt color: Int) {
