@@ -1,6 +1,6 @@
 package com.tobiasschuerg.color.models
 
-import android.support.annotation.ColorInt
+import androidx.annotation.ColorInt
 
 /**
  * Defines methods of a color model.

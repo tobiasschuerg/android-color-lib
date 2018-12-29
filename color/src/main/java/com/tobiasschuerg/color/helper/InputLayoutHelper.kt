@@ -1,10 +1,10 @@
 package com.tobiasschuerg.color.helper
 
 import android.content.res.ColorStateList
-import android.support.annotation.ColorInt
-import android.support.design.widget.TextInputLayout
-import android.support.v4.view.ViewCompat
 import android.widget.EditText
+import androidx.annotation.ColorInt
+import androidx.core.view.ViewCompat
+import com.google.android.material.textfield.TextInputLayout
 
 
 /**

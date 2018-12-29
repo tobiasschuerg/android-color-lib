@@ -1,6 +1,6 @@
 package com.tobiasschuerg.color.models
 
-import android.support.v4.graphics.ColorUtils
+import androidx.core.graphics.ColorUtils
 
 /**
  * Hue, Saturation, Lightness

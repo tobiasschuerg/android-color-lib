@@ -1,7 +1,7 @@
 package com.tobiasschuerg.color.models
 
 import android.graphics.Color
-import android.support.annotation.ColorInt
+import androidx.annotation.ColorInt
 
 /**
  * Based on

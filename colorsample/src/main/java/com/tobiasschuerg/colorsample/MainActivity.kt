@@ -2,9 +2,9 @@ package com.tobiasschuerg.colorsample
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.annotation.ColorInt
-import android.support.v7.app.AppCompatActivity
 import android.view.WindowManager
+import androidx.annotation.ColorInt
+import androidx.appcompat.app.AppCompatActivity
 import com.tobiasschuerg.color.ColorCreator
 import com.tobiasschuerg.color.helper.setAccentColor
 import com.tobiasschuerg.color.material.MaterialColor
