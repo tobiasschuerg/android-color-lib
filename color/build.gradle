@@ -55,3 +55,4 @@ dependencies {
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
     testImplementation 'org.robolectric:robolectric:4.16'
 }
+

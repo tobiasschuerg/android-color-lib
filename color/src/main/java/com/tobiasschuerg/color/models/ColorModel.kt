@@ -143,3 +143,4 @@ interface ColorModel : Comparable<ColorModel> {
         }
     }
 }
+

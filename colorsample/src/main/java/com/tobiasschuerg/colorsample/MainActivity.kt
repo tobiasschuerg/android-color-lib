@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
         val rootView = findViewById<android.view.ViewGroup>(R.id.activity_main)
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        val contentLayout = findViewById<android.view.ViewGroup>(R.id.content_layout)
+        findViewById<android.view.ViewGroup>(R.id.content_layout)
 
         // Handle window insets for edge-to-edge
         ViewCompat.setOnApplyWindowInsetsListener(rootView) { _, insets ->

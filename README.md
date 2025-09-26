@@ -1,56 +1,71 @@
+# Android Color Library
+
 [![master](https://jitpack.io/v/tobiasschuerg/android-color-lib.svg)](https://jitpack.io/#tobiasschuerg/android-color-lib)
 
-# Android (Material) Color Library
+Android library for **color space conversions** (HSV, HSL, HEX) and **Material Design color palette** generation.
 
-Android library for quick and easy **conversions between color spaces** (RGB, HSV, HSL, etc...) 
-and for creating a **material color palette** based on a single color.
+## Features
 
-<img src="https://github.com/tobiasschuerg/android-color-lib/blob/master/device-2017-01-11-233006.png" width="300">
+- 🎨 **Color Space Conversions**: Convert between RGB, HSV, HSL, HEX
+- 📱 **Material Design Palettes**: Generate complete Material color schemes
+- ♿ **Accessibility Support**: WCAG contrast ratio calculations
+- 🚀 **Jetpack Compose Compatible**: Built-in Compose Color support
 
-## Example code
+## Quick Start
 
-### Conversion between color spaces
-```
-  ColorModel color = new HEXColor("#ffff0000")
-                        .toHSV().setSaturation(0.6f)
-                                .setHue(190f)
-                        .toHSL().setLightness(0.5f);
-                        
-  tv.setTextColor(color.toColor());
-```
+### Color Conversions
+```kotlin
+val color = HEXColor("#FF2196F3")
+    .toHSV()
+    .setSaturation(0.8f)
+    .toHSL()
+    .setLightness(0.6f)
 
-### Generating Material Colors Programmatically
-```
-  MaterialColor materialColor = MaterialColor.random(true);
-  Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-  toolbar.setBackgroundColor(materialColor.get500());
-  toolbar.setTitleTextColor( materialColor.getTextBlackWhite());
-
+textView.setTextColor(color.toColor())
 ```
 
+### Material Color Palettes
+```kotlin
+val materialColor = MaterialColor.fromColorInt(Color.BLUE)
+toolbar.setBackgroundColor(materialColor.get500().toColor())
+fab.setBackgroundColor(materialColor.get600().toColor())
 
+// Or from Jetpack Compose
+val composeMaterial = MaterialColor.fromComposeColor(Color.Blue)
+```
 
-## Integration with gradle
+### Accessibility
+```kotlin
+val backgroundColor = HEXColor("#2196F3")
+val textColor = backgroundColor.getContrastingTextColor()
 
-Example Android library project that works with jitpack.io.
-
-
-https://jitpack.io/#jitpack/android-example
-
-**Step 1.** Add the JitPack repository to your build file
-```gradle
-allprojects {
-    repositories {
-        maven { url "https://jitpack.io" }
-    }
+// Check WCAG compliance
+if (backgroundColor.meetsWCAG_AA(textColor)) {
+    // Color combination is accessible
 }
 ```
-**Step 2.** Add the dependency
+
+## Installation
+
+Add to your `build.gradle`:
 
 ```gradle
+repositories {
+    maven { url "https://jitpack.io" }
+}
+
 dependencies {
-        compile 'com.github.tobiasschuerg:android-color-lib:-SNAPSHOT'
+    implementation 'com.github.tobiasschuerg:android-color-lib:latest-version'
 }
 ```
 
-Also see the guide for [building Android projects](https://github.com/jitpack/jitpack.io/blob/master/ANDROID.md)
+## Requirements
+
+- **Min SDK**: 21 (Android 5.0)
+- **Compile SDK**: 36
+- **Kotlin**: 2.2.20+
+- **Jetpack Compose**: Optional, but supported
+
+---
+
+*Simple, powerful, accessible color handling for Android.*
