@@ -43,7 +43,7 @@ import com.tobiasschuerg.color.random.RandomColor
  * @see <a href="https://stackoverflow.com/questions/28012185/what-are-the-ways-to-programmatically-generate-material-design-color-sets">Stack Overflow inspiration</a>
  */
 
-data class MaterialColor(private val hsl: HSLColor) : ColorModel() {
+data class MaterialColor(private val hsl: HSLColor) : ColorModel {
 
     /**
      * Creates a MaterialColor from any ColorModel.
@@ -201,7 +201,7 @@ data class MaterialColor(private val hsl: HSLColor) : ColorModel() {
      *
      * @return Jetpack Compose Color representation of the primary color
      */
-    fun toComposeColor(): Color = Color(get500().toColor())
+    override fun toComposeColor(): Color = Color(get500().toColor())
 
     /**
      * Calculates the relative luminance of a color for contrast calculations.
@@ -218,6 +218,10 @@ data class MaterialColor(private val hsl: HSLColor) : ColorModel() {
 
         return 0.2126 * rLin + 0.7152 * gLin + 0.0722 * bLin
     }
+
+    override fun equals(other: Any?): Boolean = colorEquals(other)
+
+    override fun hashCode(): Int = colorHashCode()
 
     /**
      * Returns the Android color integer representation of the primary color (500).

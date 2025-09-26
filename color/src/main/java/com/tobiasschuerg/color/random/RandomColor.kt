@@ -1,7 +1,6 @@
 package com.tobiasschuerg.color.random
 
 import com.tobiasschuerg.color.models.HSVColor
-import java.util.*
 
 /**
  * Creates a random color.
@@ -181,9 +180,9 @@ object RandomColor {
         lowerBounds1.add(Range(0, 0))
         lowerBounds1.add(Range(100, 0))
         defineColor(
-                Color.MONOCHROME.name,
-                null,
-                lowerBounds1
+            Color.MONOCHROME.name,
+            null,
+            lowerBounds1
         )
 
         val lowerBounds2 = ArrayList<Range>()
@@ -197,9 +196,9 @@ object RandomColor {
         lowerBounds2.add(Range(90, 55))
         lowerBounds2.add(Range(100, 50))
         defineColor(
-                Color.RED.name,
-                Range(-26, 18),
-                lowerBounds2
+            Color.RED.name,
+            Range(-26, 18),
+            lowerBounds2
         )
 
         val lowerBounds3 = ArrayList<Range>()
@@ -211,9 +210,9 @@ object RandomColor {
         lowerBounds3.add(Range(70, 70))
         lowerBounds3.add(Range(100, 70))
         defineColor(
-                Color.ORANGE.name,
-                Range(19, 46),
-                lowerBounds3
+            Color.ORANGE.name,
+            Range(19, 46),
+            lowerBounds3
         )
 
         val lowerBounds4 = ArrayList<Range>()
@@ -227,9 +226,9 @@ object RandomColor {
         lowerBounds4.add(Range(100, 75))
 
         defineColor(
-                Color.YELLOW.name,
-                Range(47, 62),
-                lowerBounds4
+            Color.YELLOW.name,
+            Range(47, 62),
+            lowerBounds4
         )
 
         val lowerBounds5 = ArrayList<Range>()
@@ -243,9 +242,9 @@ object RandomColor {
         lowerBounds5.add(Range(100, 40))
 
         defineColor(
-                Color.GREEN.name,
-                Range(63, 178),
-                lowerBounds5
+            Color.GREEN.name,
+            Range(63, 178),
+            lowerBounds5
         )
 
         val lowerBounds6 = ArrayList<Range>()
@@ -260,9 +259,9 @@ object RandomColor {
         lowerBounds6.add(Range(100, 35))
 
         defineColor(
-                Color.BLUE.name,
-                Range(179, 257),
-                lowerBounds6
+            Color.BLUE.name,
+            Range(179, 257),
+            lowerBounds6
         )
 
         val lowerBounds7 = ArrayList<Range>()
@@ -277,9 +276,9 @@ object RandomColor {
         lowerBounds7.add(Range(100, 42))
 
         defineColor(
-                Color.PURPLE.name,
-                Range(258, 282),
-                lowerBounds7
+            Color.PURPLE.name,
+            Range(258, 282),
+            lowerBounds7
         )
 
         val lowerBounds8 = ArrayList<Range>()
@@ -292,9 +291,9 @@ object RandomColor {
         lowerBounds8.add(Range(100, 73))
 
         defineColor(
-                Color.PINK.name,
-                Range(283, 334),
-                lowerBounds8
+            Color.PINK.name,
+            Range(283, 334),
+            lowerBounds8
         )
     }
 

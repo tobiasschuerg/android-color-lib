@@ -1,8 +1,8 @@
 package com.tobiasschuerg.color.random
 
 data class ColorInfo(
-        var hueRange: Range?,
-        var saturationRange: Range,
-        var brightnessRange: Range,
-        var lowerBounds: List<Range>
+    var hueRange: Range?,
+    var saturationRange: Range,
+    var brightnessRange: Range,
+    var lowerBounds: List<Range>
 )

@@ -1,108 +1,145 @@
 package com.tobiasschuerg.color.models
 
 import androidx.annotation.ColorInt
+import androidx.compose.ui.graphics.Color
+import com.tobiasschuerg.color.material.MaterialColor
 
 /**
- * Defines methods of a color model.
+ * Interface defining the contract for color models.
  *
- * Created by Tobias Schürg on 13.08.2016.
+ * A color model represents a color in a specific color space (HSV, HSL, HEX, etc.)
+ * and provides methods for conversion between different color representations.
+ *
+ * All implementations must provide a way to convert to an Android color integer,
+ * and inherit utility methods for conversions and comparisons.
+ *
+ * @author Tobias Schürg
+ * @since 13.08.2016
  */
+interface ColorModel : Comparable<ColorModel> {
 
-abstract class ColorModel : Comparable<ColorModel> {
-
+    /**
+     * Converts this color model to an Android color integer.
+     * @return Android color integer representation
+     */
     @ColorInt
-    abstract fun toColor(): Int
+    fun toColor(): Int
 
+    /**
+     * Converts this color model to HSL color space.
+     * @return HSLColor representation of this color
+     */
     fun toHSL(): HSLColor = when (this) {
         is HSLColor -> this
-        else        -> HSLColor(this)
-    }
-
-    fun toHSV(): HSVColor = when (this) {
-        is HSVColor -> this
-        else        -> HSVColor(this)
+        else -> HSLColor(this)
     }
 
     /**
-     * Compares this color to another using [HSVColor] internally.
+     * Converts this color model to HSV color space.
+     * @return HSVColor representation of this color
+     */
+    fun toHSV(): HSVColor = when (this) {
+        is HSVColor -> this
+        else -> HSVColor(this)
+    }
+
+    /**
+     * Converts this color model to HEX representation.
+     * @return HEXColor representation of this color
+     */
+    fun toHEX(): HEXColor = HEXColor(toColor())
+
+    /**
+     * Converts this color model to a Jetpack Compose Color.
+     * @return Compose Color representation of this color
+     */
+    fun toComposeColor(): Color = Color(toColor())
+
+    /**
+     * Creates a MaterialColor palette from this color.
+     * @return MaterialColor palette based on this color
+     */
+    fun toMaterialColor(): MaterialColor = MaterialColor(this)
+
+    /**
+     * Compares this color to another using HSV color space internally.
+     * Colors are compared by hue, then saturation, then value/brightness.
      */
     override fun compareTo(other: ColorModel): Int {
         val hsv1 = this.toHSV()
         val hsv2 = other.toHSV()
 
-        val c0 = hsv1.hue.toDouble().compareTo(hsv2.hue.toDouble())
+        val c0 = hsv1.hue.compareTo(hsv2.hue)
         if (c0 == 0) {
-            val c1 = hsv1.saturation.toDouble().compareTo(hsv2.saturation.toDouble())
+            val c1 = hsv1.saturation.compareTo(hsv2.saturation)
             return if (c1 == 0) {
-                hsv1.value.toDouble().compareTo(hsv2.value.toDouble())
+                hsv1.value.compareTo(hsv2.value)
             } else {
                 c1
             }
+        }
+        return c0
+    }
+
+    /**
+     * Returns a hash code based on the Android color integer representation.
+     * This ensures that colors with the same RGB values have the same hash code
+     * regardless of their color space representation.
+     */
+    fun colorHashCode(): Int = toColor()
+
+    /**
+     * Checks if this color is equal to another color based on their RGB values.
+     * Colors are considered equal if they produce the same Android color integer,
+     * regardless of their color space representation.
+     */
+    fun colorEquals(other: Any?): Boolean = when (other) {
+        is ColorModel -> this.toColor() == other.toColor()
+        else -> false
+    }
+
+    /**
+     * Returns the luminance of this color according to WCAG guidelines.
+     * Useful for determining contrast ratios.
+     * @return Luminance value between 0.0 (black) and 1.0 (white)
+     */
+    fun getLuminance(): Double {
+        val color = toColor()
+        val r = android.graphics.Color.red(color) / 255.0
+        val g = android.graphics.Color.green(color) / 255.0
+        val b = android.graphics.Color.blue(color) / 255.0
+
+        val rLin = if (r <= 0.03928) r / 12.92 else Math.pow((r + 0.055) / 1.055, 2.4)
+        val gLin = if (g <= 0.03928) g / 12.92 else Math.pow((g + 0.055) / 1.055, 2.4)
+        val bLin = if (b <= 0.03928) b / 12.92 else Math.pow((b + 0.055) / 1.055, 2.4)
+
+        return 0.2126 * rLin + 0.7152 * gLin + 0.0722 * bLin
+    }
+
+    /**
+     * Calculates the contrast ratio between this color and another color.
+     * Useful for accessibility compliance (WCAG guidelines).
+     * @param other The color to compare against
+     * @return Contrast ratio between 1.0 (no contrast) and 21.0 (maximum contrast)
+     */
+    fun getContrastRatio(other: ColorModel): Double {
+        val lum1 = this.getLuminance()
+        val lum2 = other.getLuminance()
+        val lighter = maxOf(lum1, lum2)
+        val darker = minOf(lum1, lum2)
+        return (lighter + 0.05) / (darker + 0.05)
+    }
+
+    /**
+     * Returns the appropriate text color (black or white) for maximum contrast
+     * against this color background.
+     * @return HEXColor.BLACK or HEXColor.WHITE
+     */
+    fun getContrastingTextColor(): HEXColor {
+        return if (getLuminance() > 0.5) {
+            HEXColor(android.graphics.Color.BLACK)
         } else {
-            return c0
+            HEXColor(android.graphics.Color.WHITE)
         }
     }
-
-    override fun hashCode(): Int {
-        return toColor()
-    }
-
-    override fun equals(other: Any?): Boolean {
-        return if (other is ColorModel) {
-            this.toColor() == other.toColor()
-        } else {
-            super.equals(other)
-        }
-    }
-
-    //    /**
-//     * Based on http://www.java2s.com/Code/Android/2D-Graphics/brighteracolor.htm
-//     *
-//     * @param factor
-//     */
-//    @JvmOverloads
-//    fun brighten(factor: Double = 0.9) {
-//
-//        var r = Color.red(toColor())
-//        var b = Color.blue(toColor())
-//        var g = Color.green(toColor())
-//
-//        if (r == 0 && b == 0 && g == 0) {
-//           return  fromColor(Color.DKGRAY)
-//        }
-//
-//        if (r < 3 && r != 0) {
-//            r = 3
-//        } else {
-//            r = (r / factor).toInt()
-//            r = if (r > 255) 255 else r
-//        }
-//
-//        if (b < 3 && b != 0) {
-//            b = 3
-//        } else {
-//            b = (b / .7).toInt()
-//            b = if (b > 255) 255 else b
-//        }
-//
-//        if (g < 3 && g != 0) {
-//            g = 3
-//        } else {
-//            g = (g / .7).toInt()
-//            g = if (g > 255) 255 else g
-//        }
-//
-//        fromColor(Color.rgb(r, g, b))
-//
-//    }
-//
-//    @JvmOverloads
-//    fun darken(factor: Double = 0.9) {
-//        val r = Color.red(toColor())
-//        val b = Color.blue(toColor())
-//        val g = Color.green(toColor())
-//
-//        fromColor(Color.rgb((r * factor).toInt(), (g * factor).toInt(), (b * factor).toInt()))
-//    }
-
 }

@@ -46,7 +46,7 @@ fun ColorModel.getComplimentColor(): HEXColor {
  */
 fun ColorModel.getTextBlackWhite(@ColorInt preference: Int? = Color.WHITE): Int = when (preference) {
     Color.BLACK -> if (getBrightness() < 75) Color.WHITE else Color.BLACK
-    null        -> if (getBrightness() < 130) Color.WHITE else Color.BLACK
+    null -> if (getBrightness() < 130) Color.WHITE else Color.BLACK
     Color.WHITE -> if (getBrightness() < 180) Color.WHITE else Color.BLACK
-    else        -> throw IllegalArgumentException("Color must be Color.Black or Color.White")
+    else -> throw IllegalArgumentException("Color must be Color.Black or Color.White")
 }
