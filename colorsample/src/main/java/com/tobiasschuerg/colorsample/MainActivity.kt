@@ -32,8 +32,8 @@ class MainActivity : AppCompatActivity() {
             // Apply top inset to toolbar
             toolbar.updatePadding(top = systemBars.top)
 
-            // Apply bottom inset to content
-            contentLayout.updatePadding(bottom = systemBars.bottom)
+            // Apply bottom inset to root view to ensure button is not hidden
+            rootView.updatePadding(bottom = systemBars.bottom)
 
             insets
         }
