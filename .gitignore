@@ -13,3 +13,6 @@ captures
 build
 
 local.properties
+/.idea
+/.kotlin
+*.hprof

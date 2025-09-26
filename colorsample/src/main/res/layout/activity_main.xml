@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:fitsSystemWindows="false"
     tools:context="com.tobiasschuerg.colorsample.MainActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -13,11 +14,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#000"
-        android:titleTextColor="#fff">
+        android:titleTextColor="#fff"
+        android:fitsSystemWindows="false">
 
     </androidx.appcompat.widget.Toolbar>
 
     <LinearLayout
+        android:id="@+id/content_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -25,7 +28,8 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingBottom="@dimen/activity_vertical_margin">
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:fitsSystemWindows="false">
 
         <TextView
             android:id="@+id/hello"
