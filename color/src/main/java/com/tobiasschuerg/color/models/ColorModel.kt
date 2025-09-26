@@ -30,11 +30,11 @@ abstract class ColorModel : Comparable<ColorModel> {
         val hsv1 = this.toHSV()
         val hsv2 = other.toHSV()
 
-        val c0 = java.lang.Double.compare(hsv1.hue.toDouble(), hsv2.hue.toDouble())
+        val c0 = hsv1.hue.toDouble().compareTo(hsv2.hue.toDouble())
         if (c0 == 0) {
-            val c1 = java.lang.Double.compare(hsv1.saturation.toDouble(), hsv2.saturation.toDouble())
+            val c1 = hsv1.saturation.toDouble().compareTo(hsv2.saturation.toDouble())
             return if (c1 == 0) {
-                java.lang.Double.compare(hsv1.value.toDouble(), hsv2.value.toDouble())
+                hsv1.value.toDouble().compareTo(hsv2.value.toDouble())
             } else {
                 c1
             }
