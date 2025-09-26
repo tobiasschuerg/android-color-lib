@@ -2,9 +2,12 @@ package com.tobiasschuerg.color.models
 
 import android.graphics.Color
 import com.tobiasschuerg.color.material.MaterialColor
-import org.junit.Test
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotEquals
+import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertTrue
 import org.junit.Before
-import org.junit.Assert.*
+import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import kotlin.math.abs
@@ -17,7 +20,6 @@ import kotlin.math.abs
  */
 @RunWith(RobolectricTestRunner::class)
 class ColorConversionTest {
-
     // Test colors with known values
     private lateinit var redHex: HEXColor
     private lateinit var greenHex: HEXColor
@@ -44,10 +46,14 @@ class ColorConversionTest {
     }
 
     // Helper function to compare floats with tolerance
-    private fun assertFloatEquals(expected: Float, actual: Float, tolerance: Float = 0.01f) {
+    private fun assertFloatEquals(
+        expected: Float,
+        actual: Float,
+        tolerance: Float = 0.01f,
+    ) {
         assertTrue(
             "Expected $expected but was $actual (tolerance: $tolerance)",
-            abs(expected - actual) <= tolerance
+            abs(expected - actual) <= tolerance,
         )
     }
 
@@ -56,8 +62,10 @@ class ColorConversionTest {
         // Test red conversion - pure red might have hue=0 but saturation could be different
         val redHSVConverted = redHex.toHSV()
         // For pure red, hue should be 0 or 360, saturation should be 1, value should be 1
-        assertTrue("Red hue should be 0 or close to 0",
-            redHSVConverted.hue <= 1f || redHSVConverted.hue >= 359f)
+        assertTrue(
+            "Red hue should be 0 or close to 0",
+            redHSVConverted.hue <= 1f || redHSVConverted.hue >= 359f,
+        )
         assertFloatEquals(1f, redHSVConverted.saturation, 0.1f)
         assertFloatEquals(1f, redHSVConverted.value, 0.1f)
 
@@ -104,8 +112,10 @@ class ColorConversionTest {
     fun testHexToHSLConversion() {
         // Test known HSL values - be more flexible with red since pure colors can vary
         val redHSL = redHex.toHSL()
-        assertTrue("Red hue should be 0 or close to 0",
-            redHSL.hue <= 1f || redHSL.hue >= 359f)
+        assertTrue(
+            "Red hue should be 0 or close to 0",
+            redHSL.hue <= 1f || redHSL.hue >= 359f,
+        )
         assertFloatEquals(1f, redHSL.saturation, 0.1f)
         assertFloatEquals(0.5f, redHSL.lightness, 0.1f)
 
@@ -204,7 +214,8 @@ class ColorConversionTest {
         val backToHex = materialFromCompose.toHEX()
         assertEquals(
             "Compose color conversion should maintain color",
-            hexColor.toColor(), backToHex.toColor()
+            hexColor.toColor(),
+            backToHex.toColor(),
         )
     }
 
@@ -298,14 +309,15 @@ class ColorConversionTest {
     @Test
     fun testEdgeCaseConversions() {
         // Test edge cases like pure colors, grays, etc.
-        val pureColors = listOf(
-            HEXColor("#FFFF0000"), // Pure red
-            HEXColor("#FF00FF00"), // Pure green
-            HEXColor("#FF0000FF"), // Pure blue
-            HEXColor("#FFFFFF00"), // Yellow
-            HEXColor("#FFFF00FF"), // Magenta
-            HEXColor("#FF00FFFF")  // Cyan
-        )
+        val pureColors =
+            listOf(
+                HEXColor("#FFFF0000"),
+                HEXColor("#FF00FF00"),
+                HEXColor("#FF0000FF"),
+                HEXColor("#FFFFFF00"),
+                HEXColor("#FFFF00FF"),
+                HEXColor("#FF00FFFF"),
+            )
 
         for (color in pureColors) {
             // Test round-trip conversions
@@ -337,7 +349,8 @@ class ColorConversionTest {
         // Random colors should be different (very unlikely to be the same)
         assertNotEquals(
             "Random colors should be different",
-            randomMaterial1.toColor(), randomMaterial2.toColor()
+            randomMaterial1.toColor(),
+            randomMaterial2.toColor(),
         )
 
         // Test with lightness adjustment

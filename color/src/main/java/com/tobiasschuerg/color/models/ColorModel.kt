@@ -17,7 +17,6 @@ import com.tobiasschuerg.color.material.MaterialColor
  * @since 13.08.2016
  */
 interface ColorModel : Comparable<ColorModel> {
-
     /**
      * Converts this color model to an Android color integer.
      * @return Android color integer representation
@@ -29,19 +28,21 @@ interface ColorModel : Comparable<ColorModel> {
      * Converts this color model to HSL color space.
      * @return HSLColor representation of this color
      */
-    fun toHSL(): HSLColor = when (this) {
-        is HSLColor -> this
-        else -> HSLColor(this)
-    }
+    fun toHSL(): HSLColor =
+        when (this) {
+            is HSLColor -> this
+            else -> HSLColor(this)
+        }
 
     /**
      * Converts this color model to HSV color space.
      * @return HSVColor representation of this color
      */
-    fun toHSV(): HSVColor = when (this) {
-        is HSVColor -> this
-        else -> HSVColor(this)
-    }
+    fun toHSV(): HSVColor =
+        when (this) {
+            is HSVColor -> this
+            else -> HSVColor(this)
+        }
 
     /**
      * Converts this color model to HEX representation.
@@ -93,10 +94,11 @@ interface ColorModel : Comparable<ColorModel> {
      * Colors are considered equal if they produce the same Android color integer,
      * regardless of their color space representation.
      */
-    fun colorEquals(other: Any?): Boolean = when (other) {
-        is ColorModel -> this.toColor() == other.toColor()
-        else -> false
-    }
+    fun colorEquals(other: Any?): Boolean =
+        when (other) {
+            is ColorModel -> this.toColor() == other.toColor()
+            else -> false
+        }
 
     /**
      * Returns the luminance of this color according to WCAG guidelines.
@@ -143,4 +145,3 @@ interface ColorModel : Comparable<ColorModel> {
         }
     }
 }
-

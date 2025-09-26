@@ -6,7 +6,6 @@ import androidx.annotation.ColorInt
 import androidx.core.view.ViewCompat
 import com.google.android.material.textfield.TextInputLayout
 
-
 /**
  * Colors an [EditText] and its surrounding [TextInputLayout].
  *
@@ -14,7 +13,9 @@ import com.google.android.material.textfield.TextInputLayout
  */
 
 @Throws(NoSuchFieldException::class, IllegalAccessException::class)
-fun TextInputLayout.setAccentColor(@ColorInt color: Int) {
+fun TextInputLayout.setAccentColor(
+    @ColorInt color: Int,
+) {
     // update underline color
     editText?.apply {
         val colorStateList = ColorStateList.valueOf(color)
@@ -24,4 +25,3 @@ fun TextInputLayout.setAccentColor(@ColorInt color: Int) {
     // update text color
     defaultHintTextColor = ColorStateList.valueOf(color)
 }
-

@@ -15,9 +15,8 @@ import androidx.annotation.ColorInt
 data class HSVColor(
     val hue: Float,
     val saturation: Float,
-    val value: Float
+    val value: Float,
 ) : ColorModel {
-
     constructor(color: ColorModel) : this(color.toHsvArray())
 
     constructor(hsvArray: FloatArray) : this(hsvArray[0], hsvArray[1], hsvArray[2])
@@ -35,7 +34,9 @@ data class HSVColor(
      * Creates a copy of this HSVColor with modified values.
      */
     fun setHue(newHue: Float): HSVColor = copy(hue = newHue)
+
     fun setSaturation(newSaturation: Float): HSVColor = copy(saturation = newSaturation)
+
     fun setValue(newValue: Float): HSVColor = copy(value = newValue)
 }
 

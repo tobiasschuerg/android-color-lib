@@ -15,7 +15,6 @@ import com.tobiasschuerg.color.material.MaterialColor
 import com.tobiasschuerg.color.models.getTextBlackWhite
 
 class MainActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
@@ -81,7 +80,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupColorVariant(viewId: Int, color: com.tobiasschuerg.color.models.HSLColor) {
+    private fun setupColorVariant(
+        viewId: Int,
+        color: com.tobiasschuerg.color.models.HSLColor,
+    ) {
         val textView = findViewById<TextView>(viewId)
         textView.setBackgroundColor(color.toColor())
         // Set appropriate text color based on the color's lightness

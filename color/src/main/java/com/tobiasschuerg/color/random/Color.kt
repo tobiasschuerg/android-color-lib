@@ -8,5 +8,5 @@ internal enum class Color {
     GREEN,
     BLUE,
     PURPLE,
-    PINK
+    PINK,
 }

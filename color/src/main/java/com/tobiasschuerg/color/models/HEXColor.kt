@@ -10,8 +10,9 @@ import androidx.core.graphics.toColorInt
  *
  * Created by Tobias Schürg on 13.08.2016.
  */
-data class HEXColor(@ColorInt private val color: Int) : ColorModel {
-
+data class HEXColor(
+    @ColorInt private val color: Int,
+) : ColorModel {
     constructor(hex: String) : this(hex.toColorInt())
 
     @ColorInt

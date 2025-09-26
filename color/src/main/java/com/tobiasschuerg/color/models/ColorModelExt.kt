@@ -24,7 +24,6 @@ private fun Int.square() = this * this
  *
  * @return int RGB of compliment color
  */
-// calculate compliments
 fun ColorModel.getComplimentColor(): HEXColor {
     val color = toColor()
     val alpha = Color.alpha(color)
@@ -44,9 +43,12 @@ fun ColorModel.getComplimentColor(): HEXColor {
  * @param preference: none, black or white
  * @return #Color.WHITE or #Color.BLACK
  */
-fun ColorModel.getTextBlackWhite(@ColorInt preference: Int? = Color.WHITE): Int = when (preference) {
-    Color.BLACK -> if (getBrightness() < 75) Color.WHITE else Color.BLACK
-    null -> if (getBrightness() < 130) Color.WHITE else Color.BLACK
-    Color.WHITE -> if (getBrightness() < 180) Color.WHITE else Color.BLACK
-    else -> throw IllegalArgumentException("Color must be Color.Black or Color.White")
-}
+fun ColorModel.getTextBlackWhite(
+    @ColorInt preference: Int? = Color.WHITE,
+): Int =
+    when (preference) {
+        Color.BLACK -> if (getBrightness() < 75) Color.WHITE else Color.BLACK
+        null -> if (getBrightness() < 130) Color.WHITE else Color.BLACK
+        Color.WHITE -> if (getBrightness() < 180) Color.WHITE else Color.BLACK
+        else -> throw IllegalArgumentException("Color must be Color.Black or Color.White")
+    }

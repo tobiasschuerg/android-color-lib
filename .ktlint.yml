@@ -1,0 +1,27 @@
+# ktlint configuration file
+# https://pinterest.github.io/ktlint/latest/rules/configuration-ktlint/
+
+disabled_rules:
+  # Allow wildcard imports for common Android/Kotlin packages
+  - "no-wildcard-imports"
+  # Allow flexible file naming for Android components
+  - "filename"
+
+standard:
+  # Enable all standard rules
+  final-newline: true
+  insert-final-newline: true
+  max-line-length: 120
+  indent-style: space
+  indent-size: 4
+  trim-trailing-whitespace: true
+
+experimental:
+  # Enable experimental rules for better formatting
+  trailing-comma-on-call-site: true
+  trailing-comma-on-declaration-site: true
+  function-signature-body-expression-wrapping: multiline
+  parameter-list-wrapping: multiline
+  argument-list-wrapping: multiline
+
+android: true

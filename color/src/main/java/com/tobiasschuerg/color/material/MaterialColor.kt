@@ -44,7 +44,6 @@ import com.tobiasschuerg.color.random.RandomColor
  */
 
 data class MaterialColor(private val hsl: HSLColor) : ColorModel {
-
     /**
      * Creates a MaterialColor from any ColorModel.
      * @param color The source color to convert
@@ -56,12 +55,13 @@ data class MaterialColor(private val hsl: HSLColor) : ColorModel {
      * If the original lightness is too low (< 0.1), it's increased to 0.25 for better color variants.
      */
     private val initialLightness: Float
-        get() = if (hsl.lightness < 0.1) {
-            // lightness not optimal, so we increase for better material variants
-            0.25f
-        } else {
-            hsl.lightness
-        }
+        get() =
+            if (hsl.lightness < 0.1) {
+                // lightness not optimal, so we increase for better material variants
+                0.25f
+            } else {
+                hsl.lightness
+            }
 
     companion object {
         /**
@@ -98,7 +98,9 @@ data class MaterialColor(private val hsl: HSLColor) : ColorModel {
          * @return A new MaterialColor based on the provided color
          */
         @JvmStatic
-        fun fromColorInt(@ColorInt colorInt: Int): MaterialColor = MaterialColor(HEXColor(colorInt))
+        fun fromColorInt(
+            @ColorInt colorInt: Int,
+        ): MaterialColor = MaterialColor(HEXColor(colorInt))
 
         /**
          * Creates a MaterialColor from a Jetpack Compose Color.
@@ -190,10 +192,11 @@ data class MaterialColor(private val hsl: HSLColor) : ColorModel {
      *
      * @return List of HSLColor containing all variants from 100 to 900
      */
-    fun getAllVariants(): List<HSLColor> = listOf(
-        get100(), get200(), get300(), get400(), get500(),
-        get600(), get700(), get800(), get900()
-    )
+    fun getAllVariants(): List<HSLColor> =
+        listOf(
+            get100(), get200(), get300(), get400(), get500(),
+            get600(), get700(), get800(), get900(),
+        )
 
     /**
      * Converts this MaterialColor to a Jetpack Compose Color.
@@ -207,7 +210,9 @@ data class MaterialColor(private val hsl: HSLColor) : ColorModel {
      * Calculates the relative luminance of a color for contrast calculations.
      * Based on WCAG guidelines.
      */
-    private fun calculateLuminance(@ColorInt color: Int): Double {
+    private fun calculateLuminance(
+        @ColorInt color: Int,
+    ): Double {
         val r = android.graphics.Color.red(color) / 255.0
         val g = android.graphics.Color.green(color) / 255.0
         val b = android.graphics.Color.blue(color) / 255.0

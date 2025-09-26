@@ -1,0 +1,32 @@
+# ktlint configuration for Android Color Library
+# See: https://pinterest.github.io/ktlint/latest/rules/configuration-ktlint/
+
+# Disable specific rules that might conflict with Android/Compose conventions
+disabled_rules=no-wildcard-imports,filename
+
+# Import ordering
+ij_kotlin_imports_layout=*,java.**,javax.**,kotlin.**,^
+
+# Android specific settings
+android=true
+
+# Line length - increased for better readability in documentation
+max_line_length=120
+
+# Indentation
+indent_size=4
+continuation_indent_size=4
+
+# Trailing comma settings - useful for version control
+trailing_comma_on_call_site=true
+trailing_comma_on_declaration_site=true
+
+# Function signature formatting
+function_signature_body_expression_wrapping=multiline
+function_signature_rule_force_multiline_when_parameter_count_greater_or_equal_than=3
+
+# Enum entry formatting
+enum_entry_name_case=upper_snake_case
+
+# Experimental rules (can be enabled as needed)
+experimental_rules=true

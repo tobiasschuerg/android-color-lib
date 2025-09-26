@@ -4,5 +4,5 @@ enum class Luminosity {
     BRIGHT,
     LIGHT,
     DARK,
-    RANDOM
+    RANDOM,
 }

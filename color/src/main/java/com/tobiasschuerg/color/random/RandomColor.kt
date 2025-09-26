@@ -9,7 +9,6 @@ import com.tobiasschuerg.color.models.HSVColor
  * Created by bruce on 15/2/5.
  */
 object RandomColor {
-
     private val colors = HashMap<String, ColorInfo>()
 
     init {
@@ -46,7 +45,10 @@ object RandomColor {
         return HSVColor(hue.toFloat(), saturation.toFloat(), brightness.toFloat())
     }
 
-    internal fun random(color: Color, count: Int): List<HSVColor> {
+    internal fun random(
+        color: Color,
+        count: Int,
+    ): List<HSVColor> {
         if (count <= 0) {
             throw IllegalArgumentException("count must be greater than 0")
         }
@@ -98,31 +100,42 @@ object RandomColor {
         return randomWithin(saturationRange)
     }
 
-    private fun pickBrightness(hue: Int, saturation: Int): Int {
+    private fun pickBrightness(
+        hue: Int,
+        saturation: Int,
+    ): Int {
         val colorInfo = getColorInfo(hue)
         return pickBrightness(colorInfo, saturation)
     }
 
-    private fun pickBrightness(color: Color, saturation: Int): Int {
+    private fun pickBrightness(
+        color: Color,
+        saturation: Int,
+    ): Int {
         val colorInfo: ColorInfo = colors[color.name]!!
 
         return pickBrightness(colorInfo, saturation)
     }
 
-    private fun pickBrightness(colorInfo: ColorInfo?, saturation: Int): Int {
+    private fun pickBrightness(
+        colorInfo: ColorInfo?,
+        saturation: Int,
+    ): Int {
         val min = getMinimumBrightness(colorInfo, saturation)
         val max = 100
         return randomWithin(Range(min, max))
     }
 
-    private fun getMinimumBrightness(colorInfo: ColorInfo?, saturation: Int): Int {
+    private fun getMinimumBrightness(
+        colorInfo: ColorInfo?,
+        saturation: Int,
+    ): Int {
         if (colorInfo == null) {
             return 0
         }
 
         val lowerBounds = colorInfo.lowerBounds
         for (i in 0 until lowerBounds.size - 1) {
-
             val s1 = lowerBounds[i].start
             val v1 = lowerBounds[i].end
 
@@ -133,13 +146,11 @@ object RandomColor {
             val v2 = lowerBounds[i + 1].end
 
             if (saturation >= s1 && saturation <= s2) {
-
                 val m = (v2 - v1) / (s2 - s1).toFloat()
                 val b = v1 - m * s1
 
                 return (m * saturation + b).toInt()
             }
-
         }
 
         return 0
@@ -166,7 +177,11 @@ object RandomColor {
         return Math.floor(range.start + Math.random() * (range.end + 1 - range.start)).toInt()
     }
 
-    fun defineColor(name: String, hueRange: Range?, lowerBounds: List<Range>) {
+    fun defineColor(
+        name: String,
+        hueRange: Range?,
+        lowerBounds: List<Range>,
+    ) {
         val sMin = lowerBounds[0].start
         val sMax = lowerBounds[lowerBounds.size - 1].start
         val bMin = lowerBounds[lowerBounds.size - 1].end
@@ -182,7 +197,7 @@ object RandomColor {
         defineColor(
             Color.MONOCHROME.name,
             null,
-            lowerBounds1
+            lowerBounds1,
         )
 
         val lowerBounds2 = ArrayList<Range>()
@@ -198,7 +213,7 @@ object RandomColor {
         defineColor(
             Color.RED.name,
             Range(-26, 18),
-            lowerBounds2
+            lowerBounds2,
         )
 
         val lowerBounds3 = ArrayList<Range>()
@@ -212,7 +227,7 @@ object RandomColor {
         defineColor(
             Color.ORANGE.name,
             Range(19, 46),
-            lowerBounds3
+            lowerBounds3,
         )
 
         val lowerBounds4 = ArrayList<Range>()
@@ -228,7 +243,7 @@ object RandomColor {
         defineColor(
             Color.YELLOW.name,
             Range(47, 62),
-            lowerBounds4
+            lowerBounds4,
         )
 
         val lowerBounds5 = ArrayList<Range>()
@@ -244,7 +259,7 @@ object RandomColor {
         defineColor(
             Color.GREEN.name,
             Range(63, 178),
-            lowerBounds5
+            lowerBounds5,
         )
 
         val lowerBounds6 = ArrayList<Range>()
@@ -261,7 +276,7 @@ object RandomColor {
         defineColor(
             Color.BLUE.name,
             Range(179, 257),
-            lowerBounds6
+            lowerBounds6,
         )
 
         val lowerBounds7 = ArrayList<Range>()
@@ -278,7 +293,7 @@ object RandomColor {
         defineColor(
             Color.PURPLE.name,
             Range(258, 282),
-            lowerBounds7
+            lowerBounds7,
         )
 
         val lowerBounds8 = ArrayList<Range>()
@@ -293,8 +308,7 @@ object RandomColor {
         defineColor(
             Color.PINK.name,
             Range(283, 334),
-            lowerBounds8
+            lowerBounds8,
         )
     }
-
 }

@@ -8,7 +8,6 @@ import com.tobiasschuerg.color.random.RandomColor
  * Created by Tobias
  */
 object ColorCreator {
-
     /*
     Returns a random color
      */
@@ -19,13 +18,13 @@ object ColorCreator {
      */
     fun getRandomColors(count: Int): List<HSVColor> = RandomColor.randomColors(count)
 
-
     /*
        Returns an array of ten green colors
      */
-    internal fun getSimilarRandomColors(color: Color, count: Int): List<HSVColor> {
+    internal fun getSimilarRandomColors(
+        color: Color,
+        count: Int,
+    ): List<HSVColor> {
         return RandomColor.random(color, count)
     }
 }
-
-
