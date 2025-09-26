@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'org.jetbrains.kotlin.plugin.compose'
 
 group = 'com.github.tobiasschuerg'
+version = '1.2.0'
 
 android {
     namespace 'com.tobiasschuerg.colors'
@@ -11,6 +12,8 @@ android {
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 36
+        versionCode 3
+        versionName version
     }
     buildTypes {
         release {
@@ -55,4 +58,3 @@ dependencies {
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
     testImplementation 'org.robolectric:robolectric:4.16'
 }
-
