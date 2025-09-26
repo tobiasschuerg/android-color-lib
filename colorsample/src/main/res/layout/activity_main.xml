@@ -16,7 +16,6 @@
         android:background="#000"
         android:titleTextColor="#fff"
         android:fitsSystemWindows="false">
-
     </androidx.appcompat.widget.Toolbar>
 
     <LinearLayout
@@ -24,42 +23,238 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="vertical"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:orientation="horizontal"
         android:fitsSystemWindows="false">
 
-        <TextView
-            android:id="@+id/hello"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hello World!"/>
+        <!-- Black Half -->
+        <LinearLayout
+            android:id="@+id/black_half"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:background="#000000"
+            android:padding="16dp">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/first_name_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/first_name_input"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/enter_your_first_name"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                android:text="Material Colors on Black"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textAlignment="center"
+                android:layout_marginBottom="16dp"/>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/last_name_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/last_name_input"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/color_100_black"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:text="100 - Lightest"
+                        android:textColor="#000000"
+                        android:gravity="center"
+                        android:layout_marginBottom="4dp"/>
+
+                    <TextView
+                        android:id="@+id/color_200_black"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:text="200"
+                        android:textColor="#000000"
+                        android:gravity="center"
+                        android:layout_marginBottom="4dp"/>
+
+                    <TextView
+                        android:id="@+id/color_300_black"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:text="300"
+                        android:textColor="#000000"
+                        android:gravity="center"
+                        android:layout_marginBottom="4dp"/>
+
+                    <TextView
+                        android:id="@+id/color_400_black"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:text="400"
+                        android:textColor="#000000"
+                        android:gravity="center"
+                        android:layout_marginBottom="4dp"/>
+
+                    <TextView
+                        android:id="@+id/color_500_black"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:text="500 - Primary"
+                        android:textColor="#FFFFFF"
+                        android:gravity="center"
+                        android:layout_marginBottom="4dp"/>
+
+                    <TextView
+                        android:id="@+id/color_600_black"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:text="600"
+                        android:textColor="#FFFFFF"
+                        android:gravity="center"
+                        android:layout_marginBottom="4dp"/>
+
+                    <TextView
+                        android:id="@+id/color_700_black"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:text="700"
+                        android:textColor="#FFFFFF"
+                        android:gravity="center"
+                        android:layout_marginBottom="4dp"/>
+
+                    <TextView
+                        android:id="@+id/color_800_black"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:text="800"
+                        android:textColor="#FFFFFF"
+                        android:gravity="center"
+                        android:layout_marginBottom="4dp"/>
+
+                    <TextView
+                        android:id="@+id/color_900_black"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:text="900 - Darkest"
+                        android:textColor="#FFFFFF"
+                        android:gravity="center"/>
+
+                </LinearLayout>
+
+            </ScrollView>
+
+        </LinearLayout>
+
+        <!-- White Half -->
+        <LinearLayout
+            android:id="@+id/white_half"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:padding="16dp">
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/enter_your_last_name"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                android:text="Material Colors on White"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textAlignment="center"
+                android:layout_marginBottom="16dp"/>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/color_100_white"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:text="100 - Lightest"
+                        android:textColor="#000000"
+                        android:gravity="center"
+                        android:layout_marginBottom="4dp"/>
+
+                    <TextView
+                        android:id="@+id/color_200_white"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:text="200"
+                        android:textColor="#000000"
+                        android:gravity="center"
+                        android:layout_marginBottom="4dp"/>
+
+                    <TextView
+                        android:id="@+id/color_300_white"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:text="300"
+                        android:textColor="#000000"
+                        android:gravity="center"
+                        android:layout_marginBottom="4dp"/>
+
+                    <TextView
+                        android:id="@+id/color_400_white"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:text="400"
+                        android:textColor="#000000"
+                        android:gravity="center"
+                        android:layout_marginBottom="4dp"/>
+
+                    <TextView
+                        android:id="@+id/color_500_white"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:text="500 - Primary"
+                        android:textColor="#FFFFFF"
+                        android:gravity="center"
+                        android:layout_marginBottom="4dp"/>
+
+                    <TextView
+                        android:id="@+id/color_600_white"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:text="600"
+                        android:textColor="#FFFFFF"
+                        android:gravity="center"
+                        android:layout_marginBottom="4dp"/>
+
+                    <TextView
+                        android:id="@+id/color_700_white"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:text="700"
+                        android:textColor="#FFFFFF"
+                        android:gravity="center"
+                        android:layout_marginBottom="4dp"/>
+
+                    <TextView
+                        android:id="@+id/color_800_white"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:text="800"
+                        android:textColor="#FFFFFF"
+                        android:gravity="center"
+                        android:layout_marginBottom="4dp"/>
+
+                    <TextView
+                        android:id="@+id/color_900_white"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:text="900 - Darkest"
+                        android:textColor="#FFFFFF"
+                        android:gravity="center"/>
+
+                </LinearLayout>
+
+            </ScrollView>
+
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -68,6 +263,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/restart"/>
+        android:text="@string/restart"
+        android:layout_margin="16dp"/>
 
 </LinearLayout>
