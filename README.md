@@ -4,6 +4,8 @@
 
 Android library for **color space conversions** (HSV, HSL, HEX) and **Material Design color palette** generation.
 
+<img src="https://github.com/tobiasschuerg/android-color-lib/blob/master/screenshot.png" width="300">
+
 ## Features
 
 - 🎨 **Color Space Conversions**: Convert between RGB, HSV, HSL, HEX
